@@ -1,0 +1,19 @@
+2025-12-17 18:09:30,920 Running colabfold 1.5.5
+2025-12-17 18:12:26,444 Unable to initialize backend 'cuda': FAILED_PRECONDITION: No visible GPU devices.
+2025-12-17 18:12:26,446 Unable to initialize backend 'rocm': NOT_FOUND: Could not find registered platform with name: "rocm". Available platform names are: CUDA Interpreter
+2025-12-17 18:12:26,446 Unable to initialize backend 'tpu': module 'jaxlib.xla_extension' has no attribute 'get_tpu_client'
+2025-12-17 18:12:26,448 WARNING: no GPU detected, will be using CPU
+2025-12-17 18:12:26,922 generated new fontManager
+2025-12-17 18:12:31,235 Found 6 citations for tools or databases
+2025-12-17 18:12:31,236 Query 1/1: AviTag_peptide (length 15)
+2025-12-17 18:12:35,459 Sleeping for 6s. Reason: PENDING
+2025-12-17 18:12:43,033 Setting max_seq=13, max_extra_seq=1
+2025-12-17 18:13:06,952 alphafold2_ptm_model_1_seed_000 recycle=0 pLDDT=65.4 pTM=0.0314
+2025-12-17 18:13:08,380 alphafold2_ptm_model_1_seed_000 recycle=1 pLDDT=68.3 pTM=0.0341 tol=1.19
+2025-12-17 18:13:09,865 alphafold2_ptm_model_1_seed_000 recycle=2 pLDDT=72.8 pTM=0.0365 tol=0.823
+2025-12-17 18:13:11,288 alphafold2_ptm_model_1_seed_000 recycle=3 pLDDT=72.7 pTM=0.037 tol=0.566
+2025-12-17 18:13:11,289 alphafold2_ptm_model_1_seed_000 took 21.8s (3 recycles)
+2025-12-17 18:13:11,298 reranking models by 'plddt' metric
+2025-12-17 18:13:13,723 Relaxation took 2.4s
+2025-12-17 18:13:13,723 rank_001_alphafold2_ptm_model_1_seed_000 pLDDT=72.7 pTM=0.037
+2025-12-17 18:13:14,296 Done

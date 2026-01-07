@@ -1,0 +1,54 @@
+; npt.mdp - NPT equilibration (constant pressure, temperature control)
+; Pressure and temperature equilibration to 1 bar, 300 K
+
+; Run control
+integrator  = md            ; Leap-frog molecular dynamics
+dt          = 0.002         ; 2 fs timestep
+nsteps      = 50000         ; 100 ps (50000 * 0.002 ps)
+
+; Output control
+nstxout     = 500           ; Save coordinates every 1 ps
+nstvout     = 500           ; Save velocities every 1 ps
+nstenergy   = 500           ; Save energies every 1 ps
+nstlog      = 500           ; Update log file every 1 ps
+
+; Neighbor searching
+cutoff-scheme   = Verlet
+nstlist         = 10
+rlist           = 1.0
+ns_type         = grid
+
+; Electrostatics
+coulombtype     = PME       ; Particle Mesh Ewald
+rcoulomb        = 1.0       ; Short-range cutoff (nm)
+pme_order       = 4         ; Cubic interpolation
+fourierspacing  = 0.16      ; Grid spacing for FFT
+
+; Van der Waals
+rvdw            = 1.0       ; Short-range VdW cutoff (nm)
+DispCorr        = EnerPres  ; Dispersion correction
+
+; Temperature coupling (V-rescale thermostat)
+tcoupl          = V-rescale         ; Modified Berendsen thermostat
+tc-grps         = Protein Non-Protein   ; Separate coupling groups
+tau_t           = 0.1       0.1         ; Time constant (ps)
+ref_t           = 300       300         ; Reference temperature (K)
+
+; Pressure coupling (Parrinello-Rahman barostat)
+pcoupl          = Parrinello-Rahman ; Pressure coupling on
+pcoupltype      = isotropic         ; Uniform scaling
+tau_p           = 2.0               ; Time constant (ps)
+ref_p           = 1.0               ; Reference pressure (bar)
+compressibility = 4.5e-5            ; Isothermal compressibility of water (bar^-1)
+
+; Constraints
+constraints     = h-bonds   ; Constrain H-bonds (LINCS)
+constraint_algorithm = lincs
+lincs_iter      = 1
+lincs_order     = 4
+
+; Periodic boundary conditions
+pbc             = xyz       ; 3D periodic boundary
+
+; Velocity generation
+gen_vel         = no        ; Continue from NVT velocities

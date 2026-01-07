@@ -1,0 +1,35 @@
+# Large MD trajectory files (exclude from git)
+*.xtc
+*.trr
+*.edr
+*.log
+
+# Large structure files (exclude except for final structures)
+# Keep .gro files for checkpoints
+03_fusion_md/*.gro
+!03_fusion_md/npt.gro
+!03_fusion_md/em.gro
+
+# Keep checkpoint files (IMPORTANT for continuing simulation at home!)
+# *.cpt files are needed to restart from where work PC left off
+
+# Keep topology and parameter files (needed for simulation)
+# *.top, *.itp, *.mdp, *.tpr, *.ndx are all kept
+
+# Movie files (too large for git)
+*.mp4
+*.avi
+*.mov
+
+# Processed trajectory files (keep protein_only for visualization)
+01_md_preparation/md_centered.xtc
+!01_md_preparation/protein_only.xtc
+!01_md_preparation/protein_only.gro
+
+# Backup files
+\#*#
+*~
+
+# Python cache
+__pycache__/
+*.pyc

@@ -1,0 +1,30 @@
+; minim.mdp - Energy minimization parameters
+; For use with steepest descent minimization
+
+; Run control
+integrator  = steep         ; Steepest descent minimization
+emtol       = 1000.0        ; Convergence when max force < 1000 kJ/mol/nm
+emstep      = 0.01          ; Initial step size (nm)
+nsteps      = 50000         ; Maximum steps
+
+; Neighbor searching
+cutoff-scheme   = Verlet
+nstlist         = 10
+rlist           = 1.0
+ns_type         = grid
+
+; Electrostatics
+coulombtype     = PME       ; Particle Mesh Ewald for long-range
+rcoulomb        = 1.0       ; Short-range cutoff (nm)
+pme_order       = 4         ; Cubic interpolation
+fourierspacing  = 0.16      ; Grid spacing for FFT
+
+; Van der Waals
+rvdw            = 1.0       ; Short-range VdW cutoff (nm)
+DispCorr        = EnerPres  ; Dispersion correction
+
+; Constraints
+constraints     = none      ; No constraints during minimization
+
+; Periodic boundary conditions
+pbc             = xyz       ; 3D periodic boundary

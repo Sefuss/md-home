@@ -1,0 +1,61 @@
+; md.mdp - Production MD simulation
+; 100 ns production run for conformational sampling
+
+; Run control
+integrator  = md            ; Leap-frog molecular dynamics
+dt          = 0.002         ; 2 fs timestep
+nsteps      = 50000000      ; 100 ns (50,000,000 * 0.002 ps = 100,000 ps)
+
+; Output control
+nstxout     = 0             ; Don't save coordinates (use xtc instead)
+nstvout     = 0             ; Don't save velocities
+nstfout     = 0             ; Don't save forces
+nstxout-compressed = 5000   ; Save compressed coordinates every 10 ps
+compressed-x-grps  = System ; Save all atoms
+nstlog      = 5000          ; Update log file every 10 ps
+nstenergy   = 5000          ; Save energies every 10 ps
+nstcalcenergy = 100         ; Calculate energies every 0.2 ps
+
+; Neighbor searching
+cutoff-scheme   = Verlet
+nstlist         = 10
+rlist           = 1.0
+ns_type         = grid
+
+; Electrostatics
+coulombtype     = PME       ; Particle Mesh Ewald
+rcoulomb        = 1.0       ; Short-range cutoff (nm)
+pme_order       = 4         ; Cubic interpolation
+fourierspacing  = 0.16      ; Grid spacing for FFT
+
+; Van der Waals
+rvdw            = 1.0       ; Short-range VdW cutoff (nm)
+DispCorr        = EnerPres  ; Dispersion correction
+
+; Temperature coupling (V-rescale thermostat)
+tcoupl          = V-rescale         ; Modified Berendsen thermostat
+tc-grps         = Protein Non-Protein   ; Separate coupling groups
+tau_t           = 0.1       0.1         ; Time constant (ps)
+ref_t           = 300       300         ; Reference temperature (K)
+
+; Pressure coupling (Parrinello-Rahman barostat)
+pcoupl          = Parrinello-Rahman ; Pressure coupling on
+pcoupltype      = isotropic         ; Uniform scaling
+tau_p           = 2.0               ; Time constant (ps)
+ref_p           = 1.0               ; Reference pressure (bar)
+compressibility = 4.5e-5            ; Isothermal compressibility of water (bar^-1)
+
+; Constraints
+constraints     = h-bonds   ; Constrain H-bonds (LINCS)
+constraint_algorithm = lincs
+lincs_iter      = 1
+lincs_order     = 4
+
+; Periodic boundary conditions
+pbc             = xyz       ; 3D periodic boundary
+
+; Velocity generation
+gen_vel         = no        ; Continue from NPT velocities
+
+; Checkpointing
+nstcheckpoint   = 50000     ; Save checkpoint every 100 ps (~0.1 ns)
