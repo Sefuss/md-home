@@ -33,3 +33,13 @@
 # Python cache
 __pycache__/
 *.pyc
+
+# Monitoring/Analysis Files (keep in separate CS_Hardware_Lab directory)
+hardware_profiler.py
+hardware_analyzer.py
+hardware_profile.csv
+md_monitor.py
+md_analyze.py
+md_performance.csv
+CS_FOUNDATIONS_THROUGH_HARDWARE.md
+HARDWARE_PROFILING_GUIDE.md
