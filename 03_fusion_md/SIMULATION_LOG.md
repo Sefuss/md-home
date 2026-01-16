@@ -20,9 +20,10 @@ This log tracks which machine ran which trajectory segments for later analysis/c
 - **Date:** 2026-01-14 5:30 PM → 2026-01-15 (ongoing)
 - **Steps:** 12,615,000 → 50,000,000 (target)
 - **Time:** 25.23 ns → 100 ns (target)
-- **File:** `md.part0002.xtc` (not in git - stays on home PC)
-- **Status:** Running (~52% complete as of 5:30 AM Jan 15)
-- **Performance:** ~102 ns/day
+- **File:** `md.part0002.xtc` (not in git - stays on home PC, currently 1.9 GB)
+- **Status:** Running (75% complete as of 4:00 PM Jan 15, at 74.82 ns)
+- **Performance:** ~54 ns/day sustained
+- **Expected completion:** ~3:00 AM Jan 16
 
 ---
 
@@ -33,21 +34,28 @@ The checkpoint files (`md.cpt`, `md_prev.cpt`) are committed to git and contain:
 - Exact step number for restart
 - All velocities, positions, forces
 
-**Latest checkpoint:** Step 26,120,000 (52.24 ns) as of 2026-01-15 5:30 AM
+**Latest checkpoint:** Step 37,410,000 (74.82 ns) as of 2026-01-15 4:00 PM
 
 ---
 
-## For Complete Trajectory Analysis
+## For Complete Trajectory Analysis (0-100 ns)
 
-When analysis requires the full 0-100 ns trajectory, concatenate parts:
+### IMPORTANT: Retrieve md.part0001.xtc from Work PC!
 
-```bash
-# Copy trajectory files to same location (if on different machines)
-# Then combine:
-gmx trjcat -f md.part0001.xtc md.part0002.xtc -o md_complete.xtc
+To get the **full 0-100 ns trajectory** for movie/analysis, you need both parts:
+- **Part 0001 (Work PC):** 0 → 25.23 ns - **RETRIEVE THIS AT WORK!**
+- **Part 0002 (Home PC):** 25.23 → 100 ns - Already have it
 
-# Or analyze individual segments separately
-```
+### Steps to Create Complete Trajectory:
+
+1. **At work PC tomorrow:** Copy `md.part0001.xtc` from the MD folder to USB/cloud
+2. **At home:** Place both files in same directory
+3. **Concatenate:**
+   ```bash
+   gmx trjcat -f md.part0001.xtc md.part0002.xtc -o md_complete_0-100ns.xtc
+   ```
+
+**Alternative:** If you only need 25-100 ns analysis, use `md.part0002.xtc` alone (75 ns of data)
 
 ---
 
